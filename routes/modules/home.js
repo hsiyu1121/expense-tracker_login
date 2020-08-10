@@ -7,7 +7,7 @@ const Category = require('../../models/category')
 router.get('/', (req, res) => {
   Record.find()
     .lean()
-    .then(record => res.render('index'))
+    .then(record => res.render('index',{record}))
     .catch(error => console.log(error))
 })
 
