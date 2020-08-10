@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-4 mt-4">
+      <div class="form-group">
+        <select class="form-control" name="category">
+          <option value="0">類別</option>
+          <option value="0">其他</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center">
+      <h5 class="mr-3">總金額
+        <h1 class="text-success">888<h1>
+      </h5>
+    </div>
+  </div>
+  <div class="row">
+    <ul class="list-group">
+      {{#each record}}
+      <li class="list-group-item">
+        <div class="record-list d-flex col-lg-8">
+
+          <div class="row">
+            <div class="col-auto mr-auto">
+              <h4 style="display: inline; vertical-align: middle;">{{this.name}}</h4>
+              <small class="date">{{this.date}}</small>
+            </div>
+            <div class="col-auto mr-auto">
+              <h4 style="display: inline; vertical-align: middle;">{{this.amount}}</h4>
+            </div>
+            <div class="col-auto mr-auto">
+              <a class="btn btn-success" href="./records/{{ this._id }}/edit">修改</a>
+              <form action="/records/{{this._id}}/delete" method="POST" style="display: inline;"
+                onsubmit="return confirm('確定是否刪除')">
+                <button class="btn btn-danger" type="submit">刪除</button>
+              </form>
+            </div>
+          </div>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
