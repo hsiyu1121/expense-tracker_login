@@ -4,7 +4,7 @@
       <small><sup>*</sup>必填欄位</small>
       <h4 class="d-flex justify-content-center">請輸入你的支出</h4>
 
-      <form action="/record/new" method="POST">
+      <form action="/records/new" method="POST">
         <div class="form-group row">
           <label class="col-sm-2 col-form-label">名稱: <sup>*</sup></label>
           <div class="col-sm-8">
@@ -24,12 +24,11 @@
           <label class="col-sm-2 col-form-label">類別</label>
           <div class="col-sm-8">
             <select class="form-control" name="category">
-              <option>Select..</option>
-              <option>餐飲食品</option>
-              <option>交通出行</option>
-              <option>休閒娛樂</option>
-              <option>家居物業</option>
-              <option>其他</option>
+              <option value="household">餐飲食品</option>
+              <option value="transportation">交通出行</option>
+              <option value="entertainment">休閒娛樂</option>
+              <option value="food">家居物業</option>
+              <option value="other">其他</option>
             </select>
           </div>
         </div>

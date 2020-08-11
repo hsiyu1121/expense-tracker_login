@@ -1,20 +1,19 @@
 <div class="container">
   <div class="form-group">
     <div class="d-flex justify-content-center">
-      <form method="POST" action="/filter">
-        <select class="form-control" name="category">
-          <option value="0">類別</option>
-          {{#each categories}}
-          <option value="{{this._id}}">{{this.categoryName}}</option>
-          {{/each}}
-        </select>
-      </form>
+
+      <select class="form-control" name="category" onchange="this.form.submit();">
+        <option value="/">類別</option>
+        <option value="/filter/household" {{#isEqual params "household"}}selected{{/isEqual}}>家居物業</option>
+
+      </select>
+
     </div>
   </div>
 
   <div class="d-flex justify-content-center">
     <h5>總金額
-      <h1 class="text-success">{{totalAmount}}888<h1>
+      <h1 class="text-success">{{totalAmount}}<h1>
     </h5>
   </div>
 
@@ -23,18 +22,25 @@
     {{#each record}}
     <li class="list-group-item">
       <div class="row ">
-        <div class="col-4 mr-auto">
+        <div class="col-sm-1">
+          {{#isEqual this.category 'household'}}<i class="fas fa-home fa-2x"></i>{{/isEqual}}
+          {{#isEqual this.category 'transportation'}}<i class="fas fa-shuttle-van fa-2x"></i>{{/isEqual}}
+          {{#isEqual this.category 'entertainment'}}<i class="fas  fa-grin-beam fa-2x"></i>{{/isEqual}}
+          {{#isEqual this.category 'food'}}<i class="fas fas fa-utensils fa-2x"></i>{{/isEqual}}
+          {{#isEqual this.category 'other'}}<i class="fas fa-pen fa-2x"></i>{{/isEqual}}
+        </div>
+        <div class="col-4 mr-1">
           <h4 style="display: inline; ">{{this.name}}</h4>
           <small class="date">{{this.date}}</small>
         </div>
 
-        <div class="col-6 mr-auto">
+        <div class="col-3 mr-auto">
           <h4 style="display: inline; ">{{this.amount}}</h4>
         </div>
 
         <div class="col-auto mr-auto">
-          <a class="btn btn-success" href="./record/{{ this._id }}/edit">修改</a>
-          <form action="/record/{{this._id}}/delete" method="POST" style="display: inline;"
+          <a class="btn btn-success" href="/records/{{ this._id }}/edit">修改</a>
+          <form action="/records/{{this._id}}?_method=DELETE" method="POST" style="display: inline;"
             onsubmit="return confirm('確定是否刪除')">
             <button class="btn btn-danger" type="submit">刪除</button>
           </form>

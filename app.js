@@ -7,23 +7,17 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const Record = require('./models/record')
 const Category = require('./models/category')
-const handlebars = require('handlebars')
+const Handlebars = require('handlebars')
 const routes = require('./routes')
 require('./config/mongoose')
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(methodOverride("_method"));
+app.use(methodOverride('_method'))
 app.set("view engine", "hbs");
 app.use(routes)
 app.engine("hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));
 
-handlebars.registerHelper('isEqual', (category, value, options) => {
-  if (category === value) {
-    return options.fn(this)
-  } else {
-    return options.inverse(this)
-  }
-})
+
 
 app.listen(PORT, () => {
   console.log(`Express is running on http://localhost:${PORT}`);

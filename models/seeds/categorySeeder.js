@@ -4,23 +4,23 @@ const db = require("../../config/mongoose");
 db.once("open", () => {
   Category.create(
     {
-      categoryName: "家居物業",
+      categoryName: "household",
       categoryIcon: "fas fa-home"
     },
      {
-      categoryName: "交通出行",
+      categoryName: "transportation",
       categoryIcon: "fas fa-shuttle-van"
     },
      {
-      categoryName: "休閒娛樂 ",
+      categoryName: "entertainment ",
       categoryIcon: "fas fa-grin-beam"
     },
      {
-      categoryName: "餐飲食品 ",
+      categoryName: "food",
       categoryIcon: "fas fa-utensils"
     },
      {
-      categoryName: "其他",
+      categoryName: "other",
       categoryIcon: "fas fa-pen"
     })
     .then(() => {
