@@ -13,17 +13,16 @@ Handlebars.registerHelper('isEqual', (category, value, options) => {
 })
 
 router.get('/:category', (req, res) => {
-  Record.find()
+  Record.find({category:`${req.params.category}`})
     .lean()
     .sort({date: 'desc'})
     .then( record => {
-      console.log(req.body)
-      console.log(req.params.category)
       let totalAmount = 0
-      if( record.length !== 0){
+      if (record.length !== 0){
         totalAmount = record.map(record => record.amount).reduce((accumulator, currentValue) => accumulator + currentValue)
       }
-      res.render('index',{record, totalAmount})
+      const params = req.params.category
+      res.render('index',{record, totalAmount, params})
     })
     .catch(error => console.log(error))
 })

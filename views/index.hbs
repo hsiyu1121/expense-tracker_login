@@ -1,52 +1,56 @@
 <div class="container">
   <div class="form-group">
-    <div class="d-flex justify-content-center">
-
-      <select class="form-control" name="category" onchange="this.form.submit();">
-        <option value="/">類別</option>
+    <div class="d-flex justify-content-center mt-2">
+      <select class="form-control col-4" name="category" onchange="location = this.value;">
+        <option value="/">全部</option>
         <option value="/filter/household" {{#isEqual params "household"}}selected{{/isEqual}}>家居物業</option>
-
+        <option value="/filter/transportation" {{#isEqual params "transportation"}}selected{{/isEqual}}>交通出行</option>
+        <option value="/filter/entertainment" {{#isEqual params "entertainment"}}selected{{/isEqual}}>休閒娛樂</option>
+        <option value="/filter/food" {{#isEqual params "food"}}selected{{/isEqual}}>餐飲食品</option>
+        <option value="/filter/other" {{#isEqual params "other"}}selected{{/isEqual}}>其他</option>
       </select>
-
     </div>
   </div>
 
   <div class="d-flex justify-content-center">
-    <h5>總金額
-      <h1 class="text-success">{{totalAmount}}<h1>
-    </h5>
+    <h5>總金額:</h5>
+    <h1 class="text-primary ml-3">{{totalAmount}}</h1>
   </div>
+  <div class="d-flex justify-content-center">
+    <div class="col-md-8">
+      <ul class="list-group">
+        {{#each record}}
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-auto">
+              {{#isEqual this.category 'household'}}<i class="fas fa-home" style="color:#30A9DE;"></i>{{/isEqual}}
+              {{#isEqual this.category 'transportation'}}<i class="fas fa-shuttle-van"
+                style="color:#2EC4B6;"></i>{{/isEqual}}
+              {{#isEqual this.category 'entertainment'}}<i class="fas  fa-grin-beam"
+                style="color:#F16B6F;"></i>{{/isEqual}}
+              {{#isEqual this.category 'food'}}<i class="fas fas fa-utensils" style="color:#FFBC42;"></i>{{/isEqual}}
+              {{#isEqual this.category 'other'}}<i class="fas fa-pen" style="color:#8CD790;"></i>{{/isEqual}}
+            </div>
+            <div class="col-4">
+              <h4 style="display: inline; ">{{this.name}}</h4>
+              <small class="date ml-2">{{this.date}}</small>
+            </div>
 
+            <div class="col-2 mr-auto">
+              <h4 style="display: inline; ">{{this.amount}}</h4>
+            </div>
 
-  <ul class="list-group">
-    {{#each record}}
-    <li class="list-group-item">
-      <div class="row ">
-        <div class="col-sm-1">
-          {{#isEqual this.category 'household'}}<i class="fas fa-home fa-2x"></i>{{/isEqual}}
-          {{#isEqual this.category 'transportation'}}<i class="fas fa-shuttle-van fa-2x"></i>{{/isEqual}}
-          {{#isEqual this.category 'entertainment'}}<i class="fas  fa-grin-beam fa-2x"></i>{{/isEqual}}
-          {{#isEqual this.category 'food'}}<i class="fas fas fa-utensils fa-2x"></i>{{/isEqual}}
-          {{#isEqual this.category 'other'}}<i class="fas fa-pen fa-2x"></i>{{/isEqual}}
-        </div>
-        <div class="col-4 mr-1">
-          <h4 style="display: inline; ">{{this.name}}</h4>
-          <small class="date">{{this.date}}</small>
-        </div>
-
-        <div class="col-3 mr-auto">
-          <h4 style="display: inline; ">{{this.amount}}</h4>
-        </div>
-
-        <div class="col-auto mr-auto">
-          <a class="btn btn-success" href="/records/{{ this._id }}/edit">修改</a>
-          <form action="/records/{{this._id}}?_method=DELETE" method="POST" style="display: inline;"
-            onsubmit="return confirm('確定是否刪除')">
-            <button class="btn btn-danger" type="submit">刪除</button>
-          </form>
-        </div>
-      </div>
-    </li>
-    {{/each}}
-  </ul>
+            <div class="col-auto mr-auto">
+              <a class="btn btn-success" href="/records/{{ this._id }}/edit">修改</a>
+              <form action="/records/{{this._id}}?_method=DELETE" method="POST" style="display: inline;"
+                onsubmit="return confirm('確定是否刪除')">
+                <button class="btn btn-danger" type="submit">刪除</button>
+              </form>
+            </div>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
 </div>
