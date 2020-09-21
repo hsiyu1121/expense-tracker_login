@@ -2,14 +2,31 @@ const Category = require("../category");
 const db = require("../../config/mongoose");
 
 
-db.once("open", () => {
-  const category = ['餐飲食品','交通出行','休閒娛樂','家居物業','其他']
-  for(let i = 0; i < category.length; i++){
-    Category.create({category : category[i]})
-      .then(() => {
-        console.log('category done')
-        db.close()
-      })
-      .catch(error => console.log(error))
-  }
+db.once('open', () => {
+  Category.create(
+    {
+      title: "家居物業",
+      icon: "fas fa-home"
+    },
+    {
+      title: "交通出行",
+      icon: "fas fa-shuttle-van"
+    },
+    {
+      title: "休閒娛樂",
+      icon: "fas fa-grin-beam"
+    },
+    {
+      title: "餐飲食品",
+      icon: "fas fa-utensils"
+    },
+    {
+      title: "其他",
+      icon: "fas fa-pen"
+    })
+    .then(() => {
+      console.log('categorySeeder done!')
+      db.close()
+    })
+    .catch(err => console.log(err))
 })

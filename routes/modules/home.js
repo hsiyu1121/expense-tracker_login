@@ -20,11 +20,15 @@ router.get('/', (req, res) => {
     .then( record => {
       let totalAmount = 0
       if( record.length !== 0){
-        totalAmount = record.map(record => record.amount).reduce((accumulator, currentValue) => accumulator + currentValue)
+        totalAmount = record.map(record => record.amount).reduce((a, b) => a + b)
       }
       res.render('index',{record, totalAmount})
     })
     .catch(error => console.log(error))
 })
 
+
+
 module.exports = router
+
+

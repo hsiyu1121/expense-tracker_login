@@ -1,42 +1,56 @@
 <div class="container">
   <div class="form-group">
-    <div class="d-flex justify-content-center mt-2">
-      <select class="form-control col-4" name="category" onchange="location = this.value;">
-        <option value="/">全部</option>
-        <option value="/filter/家居物業" {{#isEqual params "家居物業"}}selected{{/isEqual}}>家居物業</option>
-        <option value="/filter/交通出行" {{#isEqual params "交通出行"}}selected{{/isEqual}}>交通出行</option>
-        <option value="/filter/休閒娛樂" {{#isEqual params "休閒娛樂"}}selected{{/isEqual}}>休閒娛樂</option>
-        <option value="/filter/餐飲食品" {{#isEqual params "餐飲食品"}}selected{{/isEqual}}>餐飲食品</option>
-        <option value="/filter/其他" {{#isEqual params "其他"}}selected{{/isEqual}}>其他</option>
-      </select>
+    <div class="d-flex justify-content-center mt-4">
+      <form action="/filter">
+        <div class="btn-group">
+          <input type="month" id="start" name="month" min="2019-06" value="{{month}}">
+        </div>
+        <div class="btn-group">
+          <button type="button" id="btn-filter" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">類別</button>
+          <div class="dropdown-menu scroll-menu">
+            <button class="dropdown-item" name="sort" value="all">All</button>
+            {{#each categories}}
+            <button class="dropdown-item" name="sort" value="{{this.title}}"><i class="{{this.icon}}"></i>
+              {{this.title}}</button>
+            {{/each}}
+          </div>
+        </div>
+      </form>
     </div>
-  </div>
-  <div class="d-flex justify-content-center">
-    <h5>總金額:</h5>
-    <h1 class="text-primary ml-3">{{totalAmount}}</h1>
-  </div>
-  <div class="d-flex justify-content-center">
-    <div class="col-md-8">
-      <ul class="list-group">
-        {{#each record}}
-        <li class="list-group-item">
-          <div class="row">
-            <div class="col-auto">
-              {{#isEqual this.category '家居物業'}}<i class="fas fa-home" style="color:#30A9DE;"></i>{{/isEqual}}
-              {{#isEqual this.category '交通出行'}}<i class="fas fa-shuttle-van" style="color:#2EC4B6;"></i>{{/isEqual}}
-              {{#isEqual this.category '休閒娛樂'}}<i class="fas  fa-grin-beam" style="color:#F16B6F;"></i>{{/isEqual}}
-              {{#isEqual this.category '餐飲食品'}}<i class="fas fas fa-utensils" style="color:#FFBC42;"></i>{{/isEqual}}
-              {{#isEqual this.category '其他'}}<i class="fas fa-pen" style="color:#8CD790;"></i>{{/isEqual}}
-            </div>
-            <div class="col-6">
-              <h4 style="display: inline; ">{{this.name}}</h4>
-              <small class="date ml-2">{{this.date}}</small>
-            </div>
+    <div class="d-flex justify-content-center mt-4">
+      <h5>總金額:</h5>
+      <h1 class="text-primary ml-3">{{totalAmount}}</h1>
+    </div>
 
-            <div class="col-2 mr-auto">
-              <h4 style="display: inline; ">{{this.amount}}</h4>
+    <div class="d-flex justify-content-center">
+      <div class="col-md-8">
+        <div class="form-group">
+          {{#each records}}
+          <div class="list-group-item">
+            <div class="d-flex list-content">
+              <div class="row">
+                <div class="icon-body mr-4">
+                  <span>
+                    <i class=" 
+                      {{#isEqual this.category '收益'}}  fas fa-hand-holding-usd {{/isEqual}}
+                      {{#isEqual this.category '家居物業'}} fas fa-home {{/isEqual}}
+                      {{#isEqual this.category '交通出行'}} fas fa-shuttle-van {{/isEqual}}
+                      {{#isEqual this.category '休閒娛樂'}} fas fa-grin-beam {{/isEqual}}
+                      {{#isEqual this.category '餐飲食品'}} fas fa-utensils {{/isEqual}}
+                      {{#isEqual this.category '其他'}} fas fa-pen {{/isEqual}}
+                      "></i></span>
+                </div>
+                <div class="ml-0" style="width: 100px;">
+                  <div class="name" style="font-size: larger;">{{this.name}}</div>
+                  <small> {{this.merchant}}</small>
+                </div>
+                <div class=" d-flex align-items-center"> {{this.date}}</div>
+                <div class="my-auto ml-3" style="font-size: larger; position: absolute; left: 50%; top: 15px">
+                  ${{this.amount}}
+                </div>
+              </div>
             </div>
-
             <div class="col-auto mr-auto d-flex justify-content-end">
               <a class="btn btn-success mx-1" href="/records/{{ this._id }}/edit">修改</a>
               <form action="/records/{{this._id}}?_method=DELETE" method="POST" style="display: inline;"
@@ -45,9 +59,9 @@
               </form>
             </div>
           </div>
-        </li>
-        {{/each}}
-      </ul>
+          {{/each}}
+        </div>
+      </div>
     </div>
   </div>
 </div>
