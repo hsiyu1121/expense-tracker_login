@@ -2,7 +2,7 @@
 
 使用Node.js, Express, Express-handlebars, mongodb 套件製作而成
 
-![Alt text](https://github.com/hsiyu1121/expense-tracker/blob/master/expense-tracker.png)
+![Alt text](https://github.com/hsiyu1121/expense-tracker_login/blob/master/expense-tracker_login.png)
 
 ## 功能清單
 * 在首頁一次瀏覽所有支出的清單
