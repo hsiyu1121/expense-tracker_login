@@ -12,9 +12,7 @@ router.post('/new', (req, res) => {
   const userId = req.user._id
   const { name, category, date, merchant, amount } = req.body
   const errors = []
-  if (!name || !date || !category || !amount) {
-    errors.push({ message: ' * 為必填欄位 ' })
-  }
+  
   if (errors.length) {
     res.render('new', {
       errors,
@@ -43,7 +41,7 @@ router.put('/:id', (req, res) => {
   const _id = req.params.id
   const userId = req.user._id
   const {name, date, category, amount, merchant} = req.body
-  return Record.findById(_id, userId)
+  return Record.findById({_id, userId})
     .then(record => {
       record = Object.assign(record, req.body)
       record.save()
