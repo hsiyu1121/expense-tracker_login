@@ -2,23 +2,13 @@ const express = require("express");
 const router = express.Router();
 const Record = require("../../models/record");
 const Category = require("../../models/category");
-const Handlebars = require('handlebars')
-
-Handlebars.registerHelper('isEqual', (category, value, options) => {
-  if (category === value) {
-    return options.fn(this)
-  } else {
-    return options.inverse(this)
-  }
-})
 
 router.get('/', (req, res) => {
-  // const userId = req.user._id
+  const userId = req.user._id
   let totalAmount = 0
   const title = req.query.sort
   const month = req.query.month
   const months = []
-  const expenseList = 0
   let dataList = {}
 
   if (title === 'all') {
@@ -29,7 +19,7 @@ router.get('/', (req, res) => {
     dataList = { $and: [{ category: title }, { date: { $regex: month } }] }
   }
 
-  Record.find({ })
+  Record.find({userId })
     .lean()
     .then(records => {
       records.forEach(record => {

@@ -15,12 +15,22 @@
 
   <!-- Navbar -->
   <nav class="navbar navbar-dark bg-primary">
-    <a class="navbar-brand" href="/">家庭記帳本</a>
-    <div class="d-flex justify-content-center align-items-center">
-      <form action="/records/new" style="display: inline;">
-        <button class="btn btn-light" type="submit">新增支出</button>
+    <a class="navbar-brand" href="/">
+      {{#if isAuthenticated}}{{ user.name}}'s {{/if}}
+      家庭記帳本
+    </a>
+
+    {{#if isAuthenticated}}
+    <div class="d-flex flex-row">
+      <form action="/records/new">
+        <button class="btn btn-light mr-4" type="submit">新增支出</button>
       </form>
+      <a href="/users/logout" class="btn btn-outline-light">Logout</a>
     </div>
+    {{else}}
+    <a href="/users/login" class="btn btn-outline-light ">Login</a>
+    {{/if}}
+
   </nav>
 
 

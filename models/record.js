@@ -7,18 +7,24 @@ const recordSchema = new Schema({
   }, 
   category: {
     type: String,
-    default: true
+    required: false
   },
   date: {
-    type: String,
-    default: true
+    type: String
   },
   amount: {
     type: Number,
-    required: true
+    required: false
   },
   merchant:{
-    type: String
+    type: String,
+    required: false
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    index: true,
+    required: true
   }
   
 }) 
